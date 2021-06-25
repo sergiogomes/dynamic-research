@@ -1,10 +1,11 @@
-import { Box, Flex, Heading, Button, Icon, Table, Thead, Tr, Th, Checkbox, Tbody, Td, Text } from '@chakra-ui/react';
+import { Box, Flex, Button, Icon, Table, Thead, Tr, Th, Checkbox, Tbody, Td, Text } from '@chakra-ui/react';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 import { Header } from '../../components/Header';
 import { Pagination } from '../../components/Pagination';
 import { Sidebar } from '../../components/Sidebar';
+import { Heading } from '../../components/Heading';
 
-export default function ListUser() {
+export default function User() {
   return (
     <Box>
       <Header />
@@ -29,9 +30,7 @@ export default function ListUser() {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Heading size="lg" fontWeight="normal">
-              Usuários
-            </Heading>
+            <Heading title="Usuários" />
 
             <Button
               as="a"
