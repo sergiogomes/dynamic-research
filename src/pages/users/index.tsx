@@ -1,11 +1,17 @@
-import { Box, Flex, Button, Icon, Table, Thead, Tr, Th, Checkbox, Tbody, Td, Text } from '@chakra-ui/react';
+import { Box, Button, Checkbox, Flex, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react';
+import Link from 'next/link';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 import { Header } from '../../components/Header';
+import { Heading } from '../../components/Heading';
 import { Pagination } from '../../components/Pagination';
 import { Sidebar } from '../../components/Sidebar';
-import { Heading } from '../../components/Heading';
 
 export default function User() {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true,
+  })
+
   return (
     <Box>
       <Header />
@@ -32,35 +38,33 @@ export default function User() {
           >
             <Heading title="Usuários" />
 
-            <Button
-              as="a"
-              size="sm"
-              fontSize="sm"
-              colorScheme="pink"
-              leftIcon={<Icon as={RiAddLine} fontSize="20" />}
-            >
-              Criar novo
-            </Button>
+            <Link href="/users/create" passHref>
+              <Button
+                as="a"
+                size="sm"
+                fontSize="sm"
+                colorScheme="pink"
+                leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+              >
+                Criar novo
+              </Button>
+            </Link>
           </Flex>
 
           <Table colorScheme="whiteAlpha">
             <Thead>
               <Tr>
-                <Th
-                  paddingX="6"
-                  color="gray.300"
-                  width="8"
-                >
+                <Th paddingX={["4", "4", "6"]} color="gray.300" width="8">
                   <Checkbox colorScheme="pink" />
                 </Th>
                 <Th>Usuário</Th>
-                <Th>Data de cadastro</Th>
+                {isWideVersion && <Th>Data de cadastro</Th>}
                 <Th width="8"></Th>
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
-                <Td paddingX="6">
+                <Td paddingX={["4", "4", "6"]}>
                   <Checkbox colorScheme="pink" />
                 </Td>
                 <Td>
@@ -71,9 +75,7 @@ export default function User() {
                     </Text>
                   </Box>
                 </Td>
-                <Td>
-                  04 de Abril, 2021
-                </Td>
+                {isWideVersion && <Td> 04 de Abril, 2021 </Td>}
                 <Td>
                   <Button
                     as="a"
@@ -87,7 +89,7 @@ export default function User() {
                 </Td>
               </Tr>
               <Tr>
-                <Td paddingX="6">
+                <Td paddingX={["4", "4", "6"]}>
                   <Checkbox colorScheme="pink" />
                 </Td>
                 <Td>
@@ -98,9 +100,7 @@ export default function User() {
                     </Text>
                   </Box>
                 </Td>
-                <Td>
-                  04 de Abril, 2021
-                </Td>
+                {isWideVersion && <Td> 04 de Abril, 2021 </Td>}
                 <Td>
                   <Button
                     as="a"
@@ -114,7 +114,7 @@ export default function User() {
                 </Td>
               </Tr>
               <Tr>
-                <Td paddingX="6">
+                <Td paddingX={["4", "4", "6"]}>
                   <Checkbox colorScheme="pink" />
                 </Td>
                 <Td>
@@ -125,9 +125,7 @@ export default function User() {
                     </Text>
                   </Box>
                 </Td>
-                <Td>
-                  04 de Abril, 2021
-                </Td>
+                {isWideVersion && <Td> 04 de Abril, 2021 </Td>}
                 <Td>
                   <Button
                     as="a"
