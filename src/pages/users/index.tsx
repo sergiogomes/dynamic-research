@@ -1,20 +1,29 @@
 import { Box, Button, Checkbox, Flex, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
-import { Header } from '../../components/Header';
+import { useQuery } from 'react-query';
 import { Heading } from '../../components/Heading';
 import { Pagination } from '../../components/Pagination';
 import { Sidebar } from '../../components/Sidebar';
 
+
 export default function User() {
+  const query = useQuery();
+
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
-  })
+  });
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/users')
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }, []);
 
   return (
-    <Box>
-      <Header />
+    <Box>Josimar Junior
 
       <Flex
         width="100%"
