@@ -1,35 +1,15 @@
 import { Box, Button, Checkbox, Flex, Icon, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
-import { useQuery } from 'react-query';
-
+import { Header } from '../../components/Header';
 import { Heading } from '../../components/Heading';
 import { Pagination } from '../../components/Pagination';
 import { Sidebar } from '../../components/Sidebar';
-import { Header } from '../../components/Header';
+import { useUsers } from '../../services/hooks/useUser';
+
 
 export default function User() {
-  const { data, isLoading, error } = useQuery('users', async () => {
-    const response = await fetch('http://localhost:3000/api/users')
-    const data = await response.json()
-
-    const users = data.users.map(user => {
-      return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        createdAt: new Date(user.createdAt).toLocaleDateString('pt-BR', {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric'
-        })
-      }
-    });
-
-    return users;
-  }, {
-    staleTime: 1000 * 5, // 5 seconds
-  });
+  const { data, isLoading, isFetching, error } = useUsers();
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -60,7 +40,7 @@ export default function User() {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Heading title="Usuários" />
+            <Heading title="Usuários" isFetching={!isLoading && isFetching} />
 
             <Link href="/users/create" passHref>
               <Button
