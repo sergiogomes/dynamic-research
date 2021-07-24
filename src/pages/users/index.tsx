@@ -6,14 +6,26 @@ import { Header } from '../../components/Header';
 import { Heading } from '../../components/Heading';
 import { Pagination } from '../../components/Pagination';
 import { Sidebar } from '../../components/Sidebar';
-import { useUsers } from '../../services/hooks/useUser';
+import { getUsers, useUsers } from '../../services/hooks/useUser';
 import { queryClient } from '../../services/queryClient';
 import { api } from '../../services/api';
+import { GetServerSideProps } from 'next';
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: string;
+}
+interface UserProps {
+  users: User[]
+}
 
-export default function User() {
+export default function User({ users }: UserProps) {
   const [page, setPage] = useState(1);
-  const { data, isLoading, isFetching, error } = useUsers(page);
+  const { data, isLoading, isFetching, error } = useUsers(page, {
+    initialData: users,
+  });
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -25,7 +37,7 @@ export default function User() {
       const response = await api.get(`/users/${userId}`);
 
       console.log(response.data);
-      
+
     }, {
       staleTime: 1000 * 60 * 10 // 10 Minutos
     })
@@ -135,4 +147,14 @@ export default function User() {
       </Flex >
     </Flex>
   );
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { users, totalCount } = await getUsers(1);
+
+  return {
+    props: {
+      users,
+    }
+  }
 }
