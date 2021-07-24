@@ -1,20 +1,35 @@
-import { Box, Button, Checkbox, Flex, Icon, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react';
-import Link from 'next/link';
+import NextLink from 'next/link';
+import { Box, Button, Checkbox, Flex, Icon, Link, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react';
+import { useState } from 'react';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 import { Header } from '../../components/Header';
 import { Heading } from '../../components/Heading';
 import { Pagination } from '../../components/Pagination';
 import { Sidebar } from '../../components/Sidebar';
 import { useUsers } from '../../services/hooks/useUser';
+import { queryClient } from '../../services/queryClient';
+import { api } from '../../services/api';
 
 
 export default function User() {
-  const { data, isLoading, isFetching, error } = useUsers();
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isFetching, error } = useUsers(page);
 
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
+
+  async function handlePrefetchUser(userId: string) {
+    await queryClient.prefetchQuery(['user', userId], async () => {
+      const response = await api.get(`/users/${userId}`);
+
+      console.log(response.data);
+      
+    }, {
+      staleTime: 1000 * 60 * 10 // 10 Minutos
+    })
+  }
 
   return (
     <Flex flexDirection="column" height="100vh">
@@ -42,7 +57,7 @@ export default function User() {
           >
             <Heading title="Usuários" isFetching={!isLoading && isFetching} />
 
-            <Link href="/users/create" passHref>
+            <NextLink href="/users/create" passHref>
               <Button
                 as="a"
                 size="sm"
@@ -52,7 +67,7 @@ export default function User() {
               >
                 Criar novo
               </Button>
-            </Link>
+            </NextLink>
           </Flex>
 
           {isLoading ? (
@@ -77,40 +92,42 @@ export default function User() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data.map((user) => (
+                  {data.users.map((user) => (
                     <Tr key={user.id}>
-                    <Td paddingX={["4", "4", "6"]}>
-                      <Checkbox colorScheme="pink" />
-                    </Td>
-                    <Td>
-                      <Box>
-                        <Text fontWeight="bold">{user.name}</Text>
-                        <Text fontSize="sm" color="gray.300">
-                          {user.email}
-                        </Text>
-                      </Box>
-                    </Td>
-                    {isWideVersion && <Td> {user.createdAt} </Td>}
-                    <Td>
-                      <Button
-                        as="a"
-                        size="sm"
-                        fontSize="sm"
-                        colorScheme="purple"
-                        leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                      >
-                        Editar
-                      </Button>
-                    </Td>
-                  </Tr>
+                      <Td paddingX={["4", "4", "6"]}>
+                        <Checkbox colorScheme="pink" />
+                      </Td>
+                      <Td>
+                        <Box>
+                          <Link color="purple.400" onMouseEnter={() => handlePrefetchUser(user.id)}>
+                            <Text fontWeight="bold">{user.name}</Text>
+                          </Link>
+                          <Text fontSize="sm" color="gray.300">
+                            {user.email}
+                          </Text>
+                        </Box>
+                      </Td>
+                      {isWideVersion && <Td> {user.createdAt} </Td>}
+                      <Td>
+                        <Button
+                          as="a"
+                          size="sm"
+                          fontSize="sm"
+                          colorScheme="purple"
+                          leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                        >
+                          Editar
+                        </Button>
+                      </Td>
+                    </Tr>
                   ))}
                 </Tbody>
               </Table >
 
               <Pagination
-                totalCountOfRegisters={200}
-                currentPage={5}
-                onPageChange={() => {}}
+                totalCountOfRegisters={data.totalCount}
+                currentPage={page}
+                onPageChange={setPage}
               />
             </>
           )}
