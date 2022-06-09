@@ -34,7 +34,7 @@ export default function User({ users }: UserProps) {
 
   async function handlePrefetchUser(userId: string) {
     await queryClient.prefetchQuery(['user', userId], async () => {
-      const response = await api.get(`/users/${userId}`);
+      const response = await api.get(`/usuarios/${userId}`);
 
       console.log(response.data);
 
@@ -69,7 +69,7 @@ export default function User({ users }: UserProps) {
           >
             <Heading title="Usuários" isFetching={!isLoading && isFetching} />
 
-            <NextLink href="/users/create" passHref>
+            <NextLink href="/usuarios/create" passHref>
               <Button
                 as="a"
                 size="sm"

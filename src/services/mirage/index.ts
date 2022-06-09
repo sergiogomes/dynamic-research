@@ -39,7 +39,7 @@ export function makeServer() {
       this.namespace = 'api';
       this.timing = 750;
 
-      this.get('/users', function (schema, request) {
+      this.get('/usuarios', function (schema, request) {
         const { page = 1, per_page = 10 } = request.queryParams;
 
         const total = schema.all('user').length;
@@ -56,8 +56,8 @@ export function makeServer() {
           { users }
         );
       });
-      this.get('/users/:id');
-      this.post('/users');
+      this.get('/usuarios/:id');
+      this.post('/usuarios');
 
       this.namespace = '';
       this.passthrough();

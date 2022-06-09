@@ -14,7 +14,7 @@ interface GetUsersResponse {
 }
 
 export async function getUsers(page: number): Promise<GetUsersResponse> {
-  const { data, headers } = await api.get('/users', {
+  const { data, headers } = await api.get('/usuarios', {
     params: {
       page
     }
