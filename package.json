@@ -1,6 +1,17 @@
 {
-  "name": "dashgo",
+  "name": "dynamic-research",
   "version": "0.1.0",
+  "contributors": [
+    {
+      "name": "Sérgio Gomes"
+    },
+    {
+      "name": "Josimar Júnior"
+    },
+    {
+      "name": "João Magalhães"
+    }
+  ],
   "private": true,
   "scripts": {
     "dev": "next dev",
