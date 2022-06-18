@@ -69,7 +69,7 @@ export default function UserPage({ users }: UserProps) {
                 colorScheme="pink"
                 leftIcon={<Icon as={RiAddLine} fontSize="20" />}
               >
-                Criar novo
+                Criar usuário
               </Button>
             </NextLink>
           </Flex>
