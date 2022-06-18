@@ -1,12 +1,7 @@
 import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
-import { api } from "../api";
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  createdAt: string;
-}
+import { User } from "../../interfaces/User";
+import { api } from "../api";
 
 interface GetUsersResponse {
   users: User[];

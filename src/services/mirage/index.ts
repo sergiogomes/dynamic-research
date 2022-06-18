@@ -1,11 +1,7 @@
 import { createServer, Factory, Model, Response, ActiveModelSerializer } from 'miragejs';
 import faker from 'faker';
 
-type User = {
-  name: string;
-  email: string;
-  created_at: string;
-};
+import { User } from '../../interfaces/User';
 
 export function makeServer() {
   const server = createServer({

@@ -9,19 +9,14 @@ import { Sidebar } from '../../components/Sidebar';
 import { getUsers, useUsers } from '../../services/hooks/useUser';
 import { queryClient } from '../../services/queryClient';
 import { api } from '../../services/api';
-import { GetServerSideProps } from 'next';
+// import { GetServerSideProps } from 'next';
+import { User } from "../../interfaces/User";
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  createdAt: string;
-}
 interface UserProps {
   users: User[]
 }
 
-export default function User({ users }: UserProps) {
+export default function UserPage({ users }: UserProps) {
   const [page, setPage] = useState(1);
   const { data, isLoading, isFetching, error } = useUsers(page, {
     initialData: users,
@@ -149,12 +144,12 @@ export default function User({ users }: UserProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { users, totalCount } = await getUsers(1);
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const { users, totalCount } = await getUsers(1);
 
-  return {
-    props: {
-      users,
-    }
-  }
-}
+//   return {
+//     props: {
+//       users,
+//     }
+//   }
+// }
