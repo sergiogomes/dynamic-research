@@ -79,8 +79,33 @@ export default function CreateResearch() {
                 error={formState.errors.name}
                 {...register('name')}
               />
+              <Input
+                name="version"
+                label="Versão"
+                error={formState.errors.version}
+                {...register('version')}
+              />
+            </SimpleGrid>
+
+            <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
+              <Input
+                name="introMessage"
+                label="Texto de introdução"
+                error={formState.errors.introMessage}
+                {...register('introMessage')}
+              />
+            </SimpleGrid>
+            
+            <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
+              <Input
+                name="thanksMessage"
+                label="Texto de agradecimento"
+                error={formState.errors.thanksMessage}
+                {...register('thanksMessage')}
+              />
             </SimpleGrid>
           </VStack>
+
 
           <Flex marginTop="8" justify="flex-end">
             <HStack spacing="4">
