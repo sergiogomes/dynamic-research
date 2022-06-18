@@ -18,9 +18,7 @@ export default function ResearchPage({ researches }: ResearchProps) {
   const [page, setPage] = useState(1);
   const { data, isLoading, isFetching, error } = useResearches(page, {
     initialData: researches,
-  });
-  console.log(data);
-  
+  });  
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -99,7 +97,7 @@ export default function ResearchPage({ researches }: ResearchProps) {
                             <Text fontWeight="bold">{research.name}</Text>
                           </Link>
                           <Text fontSize="sm" color="gray.300">
-                            research.email
+                            Version {research.version}
                           </Text>
                         </Box>
                       </Td>

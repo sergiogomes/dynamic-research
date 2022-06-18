@@ -38,7 +38,7 @@ export function makeServer() {
           return '1.0.0';
         },
         createdAt() {
-          return faker.date.recent(10);
+          return faker.date.past(10);
         },
       })
     },

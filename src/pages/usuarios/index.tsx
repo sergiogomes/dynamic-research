@@ -30,9 +30,6 @@ export default function UserPage({ users }: UserProps) {
   async function handlePrefetchUser(userId: string) {
     await queryClient.prefetchQuery(['user', userId], async () => {
       const response = await api.get(`/usuarios/${userId}`);
-
-      console.log(response.data);
-
     }, {
       staleTime: 1000 * 60 * 10 // 10 Minutos
     })

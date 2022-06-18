@@ -23,7 +23,7 @@ export async function getResearches(page: number): Promise<GetResearchesResponse
       status: research.status,
       name: research.name,
       version: research.version,
-      createdAt: new Date(research.createdAt).toLocaleDateString('pt-BR', {
+      createdAt: new Date(research['created_at']).toLocaleDateString('pt-BR', {
         day: '2-digit',
         month: 'long',
         year: 'numeric'
