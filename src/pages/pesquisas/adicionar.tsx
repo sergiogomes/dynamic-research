@@ -1,10 +1,11 @@
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import * as yup from 'yup';
+
 import { Box, Button, Divider, Flex, HStack, SimpleGrid, VStack } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Link from 'next/link';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { useRouter } from 'next/router';
-import { useMutation } from 'react-query';
 
 import { Input } from '../../components/Form/Input';
 import { Header } from '../../components/Header';
@@ -12,49 +13,37 @@ import { Heading } from '../../components/Heading';
 import { Sidebar } from '../../components/Sidebar';
 import { api } from '../../services/api';
 import { queryClient } from '../../services/queryClient';
+import { IResearch } from '../../interfaces/IResearch';
 
-
-type CreateUserFormData = {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-}
-
-const createUserFormSchema = yup.object().shape({
+const createResearchFormSchema = yup.object().shape({
   name: yup.string().required('Nome é obrigatório').min(3),
-  email: yup.string().required('E-mail é obrigatório').email('E-mail inválido'),
-  password: yup.string().required('Senha é obrigatório').min(6, 'No mínimo 6 caracteres'),
-  password_confirmation: yup.string().oneOf([
-    null, yup.ref('password')
-  ], 'As senhas precisam ser iguais')
 });
 
-export default function CreateUser() {
+export default function CreateResearch() {
   const router = useRouter();
 
-  const createUser = useMutation(async (user: CreateUserFormData) => {
-    const response = await api.post('users', {
-      user: {
-        ...user,
+  const createResearch = useMutation(async (research: IResearch) => {
+    const response = await api.post('pesquisas', {
+      research: {
+        ...research,
         created_at: new Date(),
       }
     });
 
-    return response.data.user;
+    return response.data.research;
   }, {
     onSuccess: () => {
-      queryClient.invalidateQueries('users');
+      queryClient.invalidateQueries('pesquisas');
     }
   });
 
   const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(createUserFormSchema)
+    resolver: yupResolver(createResearchFormSchema)
   });
 
-  const handleCreateUser: SubmitHandler<CreateUserFormData> = async (data) => {
-    await createUser.mutateAsync(data);
-    router.push('/usuarios');
+  const handleCreateResearch: SubmitHandler<IResearch> = async (data) => {
+    await createResearch.mutateAsync(data);
+    router.push('/pesquisas');
   }
 
   return (
@@ -76,9 +65,9 @@ export default function CreateUser() {
           borderRadius={8}
           backgroundColor="gray.800"
           padding={["6", "8"]}
-          onSubmit={handleSubmit(handleCreateUser)}
+          onSubmit={handleSubmit(handleCreateResearch)}
         >
-          <Heading title="Criar usuário" />
+          <Heading title="Criar Pesquisa" />
 
           <Divider marginY="6" borderColor="gray.700"></Divider>
 
@@ -86,40 +75,16 @@ export default function CreateUser() {
             <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
               <Input
                 name="name"
-                label="Nome completo"
+                label="Nome da pesquisa"
                 error={formState.errors.name}
                 {...register('name')}
-              />
-              <Input
-                name="email"
-                type="email"
-                label="E-mail"
-                error={formState.errors.email}
-                {...register('email')}
-              />
-            </SimpleGrid>
-
-            <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
-              <Input
-                name="password"
-                type="password"
-                label="Senha"
-                error={formState.errors.password}
-                {...register('password')}
-              />
-              <Input
-                name="password_confirmation"
-                type="password"
-                label="Confirmação da sennha"
-                error={formState.errors.password_confirmation}
-                {...register('password_confirmation')}
               />
             </SimpleGrid>
           </VStack>
 
           <Flex marginTop="8" justify="flex-end">
             <HStack spacing="4">
-              <Link href="/usuarios" passHref>
+              <Link href="/pesquisas" passHref>
                 <Button colorScheme="whiteAlpha">Cancelar</Button>
               </Link>
               <Button colorScheme="pink" type="submit" isLoading={formState.isSubmitting}>Salvar</Button>
