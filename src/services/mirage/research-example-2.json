@@ -1,0 +1,163 @@
+{
+  "name": "Talentflow - Talento",
+  "version": "1.0.0.0",
+  "type": "talentflow",
+  "sections": [
+    {
+      "name": "",
+      "description": "",
+      "questions": [
+        {
+          "question": "1 - As perguntas a seguir envolvem dados pessoais, você está de acordo?",
+          "explanation": "",
+          "responseType": 5,
+          "responseOptions": [
+            {
+              "name": "Sim",
+              "explanation": "",
+              "weight": 100
+            },
+            {
+              "name": "Não",
+              "explanation": "",
+              "weight": 0
+            }
+          ],
+          "responseLabel": "",
+          "responsePlaceholder": "",
+          "allowDontKnow": false,
+          "dontKnowLabel": "",
+          "allowJustification": false,
+          "justificationLabel": "",
+          "justificationPlaceholder": "",
+          "allowAttachment": false,
+          "attachmentLabel": "",
+          "attachmentPlaceholder": ""
+        },
+        {
+          "question": "2 - Qual é o seu nome?",
+          "explanation": "",
+          "responseType": 1,
+          "responseOptions": [],
+          "responseLabel": "Nome",
+          "responsePlaceholder": "Digite aqui o seu nome completo",
+          "allowDontKnow": false,
+          "dontKnowLabel": "",
+          "allowJustification": false,
+          "justificationLabel": "",
+          "justificationPlaceholder": "",
+          "allowAttachment": false,
+          "attachmentLabel": "",
+          "attachmentPlaceholder": ""
+        },
+        {
+          "question": "3 - Anexe aqui o seu LinkedIn ou sua página de apresentação pessoal",
+          "explanation": "Precisamos para saber mais sobre você",
+          "responseType": 1,
+          "responseOptions": [],
+          "responseLabel": "Link",
+          "responsePlaceholder": "https://",
+          "allowDontKnow": false,
+          "dontKnowLabel": "",
+          "allowJustification": false,
+          "justificationLabel": "",
+          "justificationPlaceholder": "",
+          "allowAttachment": false,
+          "attachmentLabel": "",
+          "attachmentPlaceholder": ""
+        },
+        {
+          "question": "4 - Insira aqui o seu melhor e-mail para contato",
+          "explanation": "",
+          "responseType": 3,
+          "responseOptions": [],
+          "responseLabel": "Email",
+          "responsePlaceholder": "Digite aqui o seu email",
+          "allowDontKnow": false,
+          "dontKnowLabel": "",
+          "allowJustification": false,
+          "justificationLabel": "",
+          "justificationPlaceholder": "",
+          "allowAttachment": false,
+          "attachmentLabel": "",
+          "attachmentPlaceholder": ""
+        },
+        {
+          "question": "5 - E se possível, insira também o seu telefone",
+          "explanation": "",
+          "responseType": 1,
+          "responseOptions": [],
+          "responseLabel": "Telefone",
+          "responsePlaceholder": "()_____-____",
+          "allowDontKnow": false,
+          "dontKnowLabel": "",
+          "allowJustification": false,
+          "justificationLabel": "",
+          "justificationPlaceholder": "",
+          "allowAttachment": false,
+          "attachmentLabel": "",
+          "attachmentPlaceholder": ""
+        },
+        {
+          "question": "6 - Nos informe a sua disponibilidade",
+          "explanation": "",
+          "responseType": 5,
+          "responseOptions": [
+            {
+              "name": "Imediata",
+              "explanation": "",
+              "weight": 100
+            },
+            {
+              "name": "A Combinar",
+              "explanation": "",
+              "weight": -2
+            }
+          ],
+          "responseLabel": "",
+          "responsePlaceholder": "",
+          "allowDontKnow": false,
+          "dontKnowLabel": "",
+          "allowJustification": true,
+          "justificationLabel": "A partir de quando você estará disponível?",
+          "justificationPlaceholder": "Uma semana, duas semanas",
+          "allowAttachment": false,
+          "attachmentLabel": "",
+          "attachmentPlaceholder": ""
+        },
+        {
+          "question": "7 - Agora, selecione as suas habilidades técnicas",
+          "explanation": "Selecione quantas quiser",
+          "responseType": 6,
+          "responseOptions": [
+            {
+              "name": "Front-End",
+              "explanation": "",
+              "weight": 1
+            },
+            {
+              "name": "Back-End",
+              "explanation": "",
+              "weight": 2
+            },
+            {
+              "name": "Full-Stack",
+              "explanation": "",
+              "weight": 3
+            }
+          ],
+          "responseLabel": "",
+          "responsePlaceholder": "",
+          "allowDontKnow": false,
+          "dontKnowLabel": "",
+          "allowJustification": true,
+          "justificationLabel": "Não encontrou sua habilidade técnica?",
+          "justificationPlaceholder": "Compartilhe suas habilidades aqui",
+          "allowAttachment": false,
+          "attachmentLabel": "",
+          "attachmentPlaceholder": ""
+        }
+      ]
+    }
+  ]
+}
