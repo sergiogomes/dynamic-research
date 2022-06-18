@@ -69,7 +69,7 @@ export default function User({ users }: UserProps) {
           >
             <Heading title="Usuários" isFetching={!isLoading && isFetching} />
 
-            <NextLink href="/usuarios/create" passHref>
+            <NextLink href="/usuarios/adicionar" passHref>
               <Button
                 as="a"
                 size="sm"
