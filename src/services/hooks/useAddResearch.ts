@@ -102,8 +102,18 @@ export const useAddResearch = (): useAddResearchReturn => {
     router.push('/pesquisas');
   }
 
+  const addSection = () => {
+    const sections = research.sections;
+    sections.push(initialSectionState);
+
+    setResearch(prevState => ({
+      ...prevState,
+      sections,
+    }))
+  };
+
   return {
-    research, formState, register, handleSubmit, handleResearchOnChange, handleCreateResearch
+    research, formState, register, handleSubmit, handleResearchOnChange, handleCreateResearch, addSection,
   }
 }
 
@@ -114,4 +124,5 @@ interface useAddResearchReturn {
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   handleResearchOnChange: (event: React.ChangeEvent<HTMLInputElement>, key: string) => void;
   handleCreateResearch: SubmitHandler<IResearch>;
+  addSection: () => void;
 }
