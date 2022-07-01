@@ -9,7 +9,7 @@ import { Sidebar } from '../../components/Sidebar';
 import { useAddResearch } from '../../services/hooks/useAddResearch';
 
 const CreateResearch = () => {
-  const { register, handleSubmit, formState, handleCreateResearch } = useAddResearch();
+  const { research, formState, register, handleSubmit, handleResearchOnChange, handleCreateResearch } = useAddResearch();
 
   return (
     <Box>
@@ -41,14 +41,17 @@ const CreateResearch = () => {
               <Input
                 name="name"
                 label="Nome da pesquisa"
+                value={research.name}
                 error={formState.errors.name}
                 {...register('name')}
+                onChange={(event) => handleResearchOnChange(event, 'name')}
               />
               <Input
                 name="version"
                 label="Versão"
                 error={formState.errors.version}
                 {...register('version')}
+                onChange={(event) => handleResearchOnChange(event, 'version')}
               />
             </SimpleGrid>
 
@@ -58,6 +61,7 @@ const CreateResearch = () => {
                 label="Texto de introdução"
                 error={formState.errors.introMessage}
                 {...register('introMessage')}
+                onChange={(event) => handleResearchOnChange(event, 'introMessage')}
               />
             </SimpleGrid>
             
@@ -67,6 +71,7 @@ const CreateResearch = () => {
                 label="Texto de agradecimento"
                 error={formState.errors.thanksMessage}
                 {...register('thanksMessage')}
+                onChange={(event) => handleResearchOnChange(event, 'thanksMessage')}
               />
             </SimpleGrid>
           </VStack>

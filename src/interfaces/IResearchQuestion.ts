@@ -20,5 +20,5 @@ export interface IResearchQuestion {
   minLength: number;
   maxLength: number;
   mask: string;
-  responseOptions: IResearchResponseOption[]
+  responseOptions: IResearchResponseOption[];
 }
