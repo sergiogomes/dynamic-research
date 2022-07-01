@@ -18,7 +18,7 @@ export default function ResearchPage({ researches }: ResearchProps) {
   const [page, setPage] = useState(1);
   const { data, isLoading, isFetching, error } = useResearches(page, {
     initialData: researches,
-  });  
+  });
 
   const isWideVersion = useBreakpointValue({
     base: false,

@@ -1,50 +1,15 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import * as yup from 'yup';
 
+import Link from 'next/link';
 import { Box, Button, Divider, Flex, HStack, SimpleGrid, VStack } from '@chakra-ui/react';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Input } from '../../components/Form/Input';
 import { Header } from '../../components/Header';
 import { Heading } from '../../components/Heading';
 import { Sidebar } from '../../components/Sidebar';
-import { api } from '../../services/api';
-import { queryClient } from '../../services/queryClient';
-import { IResearch } from '../../interfaces/IResearch';
+import { useAddResearch } from '../../services/hooks/useAddResearch';
 
-const createResearchFormSchema = yup.object().shape({
-  name: yup.string().required('Nome é obrigatório').min(3),
-});
-
-export default function CreateResearch() {
-  const router = useRouter();
-
-  const createResearch = useMutation(async (research: IResearch) => {
-    const response = await api.post('pesquisas', {
-      research: {
-        ...research,
-        created_at: new Date(),
-      }
-    });
-
-    return response.data.research;
-  }, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('pesquisas');
-    }
-  });
-
-  const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(createResearchFormSchema)
-  });
-
-  const handleCreateResearch: SubmitHandler<IResearch> = async (data) => {
-    await createResearch.mutateAsync(data);
-    router.push('/pesquisas');
-  }
+const CreateResearch = () => {
+  const { register, handleSubmit, formState, handleCreateResearch } = useAddResearch();
 
   return (
     <Box>
@@ -109,6 +74,12 @@ export default function CreateResearch() {
 
           <Flex marginTop="8" justify="flex-end">
             <HStack spacing="4">
+              <Button colorScheme="pink" type="submit">Adicionar Sessão</Button>
+            </HStack>
+          </Flex>
+
+          <Flex marginTop="8" justify="flex-end">
+            <HStack spacing="4">
               <Link href="/pesquisas" passHref>
                 <Button colorScheme="whiteAlpha">Cancelar</Button>
               </Link>
@@ -120,3 +91,5 @@ export default function CreateResearch() {
     </Box >
   );
 }
+
+export default CreateResearch;
