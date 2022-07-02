@@ -3,6 +3,7 @@ import { Box, Button, Divider, Flex, HStack, SimpleGrid, VStack } from '@chakra-
 
 import { Input } from '../../components/Form/Input';
 import { Heading } from '../../components/Heading';
+import { CreateResearchResponseOption } from '../ResearchResponseOption';
 import { IResearchQuestion } from '../../interfaces/IResearchQuestion';
 
 interface CreateResearchQuestionProps {
@@ -36,20 +37,33 @@ export const CreateResearchQuestion = ({ queId, secId, question, handleOnChange,
           />
         </SimpleGrid>
 
-        <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
+        {/* <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
           <Input
             name="explanation"
             label="Explicação"
             value={question.explanation}
             onChange={(event) => handleOnChange(event.target.value, 'explanation', secId, queId)}
           />
-        </SimpleGrid>
+        </SimpleGrid> */}
       </VStack>
+
+      {!!question.responseOptions && question.responseOptions.length > 0 && (
+        question.responseOptions.map((option, idx) => (
+          <CreateResearchResponseOption
+            key={idx}
+            optId={idx}
+            queId={queId}
+            secId={secId}
+            option={option}
+            handleOnChange={handleOnChange}
+          />
+        ))
+      )}
 
 
       <Flex marginTop="8" justify="flex-end">
         <HStack spacing="4">
-          <Button colorScheme="pink" type="button" onClick={() => addResponseOption(queId)}>Adicionar Opção de Resposta</Button>
+          <Button colorScheme="pink" type="button" onClick={() => addResponseOption(secId, queId)}>Adicionar Opção de Resposta</Button>
         </HStack>
       </Flex>
     </Box>
