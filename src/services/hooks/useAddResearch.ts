@@ -1,8 +1,9 @@
-import { ChangeEventHandler, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FieldValues, FormState, SubmitHandler, useForm, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as yup from 'yup';
+import _ from 'lodash';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -89,12 +90,30 @@ export const useAddResearch = (): useAddResearchReturn => {
     resolver: yupResolver(createResearchFormSchema)
   });
 
-  const handleResearchOnChange = (event: React.ChangeEvent<HTMLInputElement>, key: string) => {
-    setResearch(prevState => ({
-      ...prevState,
-      [key]: event.target.value,
-    }))
-  }
+  const handleOnChange = (
+    value: string | number,
+    target: string,
+    secId?: number,
+    queId?: number,
+    optId?: number
+  ) => {
+    console.log('here')
+    const researchClone = _.cloneDeep(research);
+
+    if (optId || optId === 0) {
+      researchClone.sections[secId].questions[queId].responseOptions[
+        optId
+      ][target] = value;
+    } else if (queId || queId === 0) {
+      researchClone.sections[secId].questions[queId][target] = value;
+    } else if (secId || secId === 0) {
+      researchClone.sections[secId][target] = value;
+    } else {
+      researchClone[target] = value;
+    }
+
+    setResearch(researchClone);
+  };
 
   const handleCreateResearch: SubmitHandler<IResearch> = async (data) => {
     // await createResearch.mutateAsync(data);
@@ -113,7 +132,7 @@ export const useAddResearch = (): useAddResearchReturn => {
   };
 
   return {
-    research, formState, register, handleSubmit, handleResearchOnChange, handleCreateResearch, addSection,
+    research, formState, register, handleSubmit, handleOnChange, handleCreateResearch, addSection,
   }
 }
 
@@ -122,7 +141,7 @@ interface useAddResearchReturn {
   formState: FormState<FieldValues>;
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
-  handleResearchOnChange: (event: React.ChangeEvent<HTMLInputElement>, key: string) => void;
+  handleOnChange: (value: string | number, target: string, secId?: number, queId?: number, optId?: number) => void;
   handleCreateResearch: SubmitHandler<IResearch>;
   addSection: () => void;
 }

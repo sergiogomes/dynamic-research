@@ -6,11 +6,11 @@ import { Input } from '../../components/Form/Input';
 import { Header } from '../../components/Header';
 import { Heading } from '../../components/Heading';
 import { Sidebar } from '../../components/Sidebar';
+import { CreateResearchSection } from '../../components/ResearchSection';
 import { useAddResearch } from '../../services/hooks/useAddResearch';
-import CreateResearchSection from '../../components/ResearchSection';
 
 const CreateResearch = () => {
-  const { research, formState, register, handleSubmit, handleResearchOnChange, handleCreateResearch, addSection } = useAddResearch();
+  const { research, formState, register, handleSubmit, handleOnChange, handleCreateResearch, addSection } = useAddResearch();
 
   return (
     <Box>
@@ -25,14 +25,16 @@ const CreateResearch = () => {
       >
         <Sidebar />
 
-        <Box flex="1">
+        <Box
+          as="form"
+          flex="1"
+          onSubmit={handleSubmit(handleCreateResearch)}
+        >
           <Box
-            as="form"
             borderRadius={8}
             backgroundColor="gray.800"
             padding={["6", "8"]}
             mb={["6", "8"]}
-            onSubmit={handleSubmit(handleCreateResearch)}
           >
             <Heading title="Criar Pesquisa" />
 
@@ -46,7 +48,7 @@ const CreateResearch = () => {
                   value={research.name}
                   error={formState.errors.name}
                   {...register('name')}
-                  onChange={(event) => handleResearchOnChange(event, 'name')}
+                  onChange={(event) => handleOnChange(event.target.value, 'name')}
                 />
                 <Input
                   name="version"
@@ -54,7 +56,7 @@ const CreateResearch = () => {
                   value={research.version}
                   error={formState.errors.version}
                   {...register('version')}
-                  onChange={(event) => handleResearchOnChange(event, 'version')}
+                  onChange={(event) => handleOnChange(event.target.value, 'version')}
                 />
               </SimpleGrid>
 
@@ -65,7 +67,7 @@ const CreateResearch = () => {
                   value={research.introMessage}
                   error={formState.errors.introMessage}
                   {...register('introMessage')}
-                  onChange={(event) => handleResearchOnChange(event, 'introMessage')}
+                  onChange={(event) => handleOnChange(event.target.value, 'introMessage')}
                 />
               </SimpleGrid>
               
@@ -76,7 +78,7 @@ const CreateResearch = () => {
                   value={research.thanksMessage}
                   error={formState.errors.thanksMessage}
                   {...register('thanksMessage')}
-                  onChange={(event) => handleResearchOnChange(event, 'thanksMessage')}
+                  onChange={(event) => handleOnChange(event.target.value, 'thanksMessage')}
                 />
               </SimpleGrid>
             </VStack>
@@ -91,7 +93,12 @@ const CreateResearch = () => {
 
           {!!research.sections && research.sections.length > 0 && (
             research.sections.map((section, idx) => (
-              <CreateResearchSection key={idx} section={section} id={idx+1} />
+              <CreateResearchSection
+                key={idx}
+                idx={idx}
+                section={section}
+                handleOnChange={handleOnChange}
+              />
             ))
           )}
 

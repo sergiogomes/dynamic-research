@@ -1,30 +1,26 @@
 
-import Link from 'next/link';
-import { Box, Button, Divider, Flex, HStack, SimpleGrid, VStack } from '@chakra-ui/react';
+import { Box, Divider, SimpleGrid, VStack } from '@chakra-ui/react';
 
 import { Input } from '../../components/Form/Input';
 import { Heading } from '../../components/Heading';
-import { useAddResearch } from '../../services/hooks/useAddResearch';
 import { IResearchSection } from '../../interfaces/IResearchSection';
 
 interface CreateResearchSectionProps {
-  id: number;
-  section: IResearchSection
+  idx: number;
+  section: IResearchSection;
+  handleOnChange: (value: string | number, target: string, secId?: number, queId?: number, optId?: number) => void;
 }
 
-const CreateResearchSection = ({ id, section }: CreateResearchSectionProps) => {
-  const { formState, register, handleSubmit, handleResearchOnChange, handleCreateResearch, addSection } = useAddResearch();
+export const CreateResearchSection = ({ idx, section, handleOnChange }: CreateResearchSectionProps) => {
 
   return (
     <Box
-      as="form"
       borderRadius={8}
       backgroundColor="gray.800"
       padding={["6", "8"]}
       mb={["6", "8"]}
-      onSubmit={handleSubmit(handleCreateResearch)}
     >
-      <Heading title={`Sessão ${id}`} />
+      <Heading title={`Sessão ${idx + 1}`} />
 
       <Divider marginY="6" borderColor="gray.700"></Divider>
 
@@ -34,9 +30,7 @@ const CreateResearchSection = ({ id, section }: CreateResearchSectionProps) => {
             name="name"
             label="Nome da sessão"
             value={section.name}
-            error={formState.errors.name}
-            {...register('name')}
-            onChange={(event) => handleResearchOnChange(event, 'name')}
+            onChange={(event) => handleOnChange(event.target.value, 'name', idx)}
           />
         </SimpleGrid>
 
@@ -45,21 +39,17 @@ const CreateResearchSection = ({ id, section }: CreateResearchSectionProps) => {
             name="description"
             label="Descrição"
             value={section.description}
-            error={formState.errors.description}
-            {...register('description')}
-            onChange={(event) => handleResearchOnChange(event, 'description')}
+            onChange={(event) => handleOnChange(event.target.value, 'description', idx)}
           />
         </SimpleGrid>
       </VStack>
 
 
-      <Flex marginTop="8" justify="flex-end">
+      {/* <Flex marginTop="8" justify="flex-end">
         <HStack spacing="4">
           <Button colorScheme="pink" type="button" onClick={addSection}>Adicionar Pergunta</Button>
         </HStack>
-      </Flex>
+      </Flex> */}
     </Box>
   );
 }
-
-export default CreateResearchSection;
