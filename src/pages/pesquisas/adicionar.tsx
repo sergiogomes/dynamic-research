@@ -10,7 +10,7 @@ import { CreateResearchSection } from '../../components/ResearchSection';
 import { useAddResearch } from '../../services/hooks/useAddResearch';
 
 const CreateResearch = () => {
-  const { research, formState, register, handleSubmit, handleOnChange, handleCreateResearch, addSection } = useAddResearch();
+  const { research, formState, register, handleSubmit, handleOnChange, handleCreateResearch, addSection, addQuestion, addResponseOption } = useAddResearch();
 
   return (
     <Box>
@@ -98,6 +98,7 @@ const CreateResearch = () => {
                 idx={idx}
                 section={section}
                 handleOnChange={handleOnChange}
+                addQuestion={addQuestion}
               />
             ))
           )}

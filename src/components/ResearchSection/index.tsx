@@ -1,5 +1,5 @@
 
-import { Box, Divider, SimpleGrid, VStack } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, HStack, SimpleGrid, VStack } from '@chakra-ui/react';
 
 import { Input } from '../../components/Form/Input';
 import { Heading } from '../../components/Heading';
@@ -9,9 +9,10 @@ interface CreateResearchSectionProps {
   idx: number;
   section: IResearchSection;
   handleOnChange: (value: string | number, target: string, secId?: number, queId?: number, optId?: number) => void;
+  addQuestion: (secId?: number) => void;
 }
 
-export const CreateResearchSection = ({ idx, section, handleOnChange }: CreateResearchSectionProps) => {
+export const CreateResearchSection = ({ idx, section, handleOnChange, addQuestion }: CreateResearchSectionProps) => {
 
   return (
     <Box
@@ -45,11 +46,11 @@ export const CreateResearchSection = ({ idx, section, handleOnChange }: CreateRe
       </VStack>
 
 
-      {/* <Flex marginTop="8" justify="flex-end">
+      <Flex marginTop="8" justify="flex-end">
         <HStack spacing="4">
-          <Button colorScheme="pink" type="button" onClick={addSection}>Adicionar Pergunta</Button>
+          <Button colorScheme="pink" type="button" onClick={() => addQuestion(idx)}>Adicionar Pergunta</Button>
         </HStack>
-      </Flex> */}
+      </Flex>
     </Box>
   );
 }

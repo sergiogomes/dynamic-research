@@ -122,17 +122,35 @@ export const useAddResearch = (): useAddResearchReturn => {
   }
 
   const addSection = () => {
-    const sections = research.sections;
-    sections.push(initialSectionState);
+    const researchClone = _.cloneDeep(research);
+    researchClone.sections.push(initialSectionState);
 
-    setResearch(prevState => ({
-      ...prevState,
-      sections,
-    }))
+    setResearch(researchClone);
+  };
+
+  const addQuestion = (secId: number) => {
+    const researchClone = _.cloneDeep(research);
+    researchClone
+      .sections[secId]
+      .questions
+      .push(initialQuestionState);
+
+    setResearch(researchClone);
+  };
+
+  const addResponseOption = (secId: number, queId: number) => {
+    const researchClone = _.cloneDeep(research);
+    researchClone
+      .sections[secId]
+      .questions[queId]
+      .responseOptions
+      .push(initialResponseOptionState);
+
+    setResearch(researchClone);
   };
 
   return {
-    research, formState, register, handleSubmit, handleOnChange, handleCreateResearch, addSection,
+    research, formState, register, handleSubmit, handleOnChange, handleCreateResearch, addSection, addQuestion, addResponseOption
   }
 }
 
@@ -144,4 +162,6 @@ interface useAddResearchReturn {
   handleOnChange: (value: string | number, target: string, secId?: number, queId?: number, optId?: number) => void;
   handleCreateResearch: SubmitHandler<IResearch>;
   addSection: () => void;
+  addQuestion: (secId?: number) => void;
+  addResponseOption: (secId?: number, queId?: number) => void;
 }
