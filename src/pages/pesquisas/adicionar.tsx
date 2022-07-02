@@ -95,10 +95,11 @@ const CreateResearch = () => {
             research.sections.map((section, idx) => (
               <CreateResearchSection
                 key={idx}
-                idx={idx}
+                secId={idx}
                 section={section}
                 handleOnChange={handleOnChange}
                 addQuestion={addQuestion}
+                addResponseOption={addResponseOption}
               />
             ))
           )}

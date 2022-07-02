@@ -97,7 +97,6 @@ export const useAddResearch = (): useAddResearchReturn => {
     queId?: number,
     optId?: number
   ) => {
-    console.log('here')
     const researchClone = _.cloneDeep(research);
 
     if (optId || optId === 0) {

@@ -3,16 +3,18 @@ import { Box, Button, Divider, Flex, HStack, SimpleGrid, VStack } from '@chakra-
 
 import { Input } from '../../components/Form/Input';
 import { Heading } from '../../components/Heading';
+import { CreateResearchQuestion } from '../ResearchQuestion';
 import { IResearchSection } from '../../interfaces/IResearchSection';
 
 interface CreateResearchSectionProps {
-  idx: number;
+  secId: number;
   section: IResearchSection;
   handleOnChange: (value: string | number, target: string, secId?: number, queId?: number, optId?: number) => void;
   addQuestion: (secId?: number) => void;
+  addResponseOption: (secId?: number, queId?: number) => void;
 }
 
-export const CreateResearchSection = ({ idx, section, handleOnChange, addQuestion }: CreateResearchSectionProps) => {
+export const CreateResearchSection = ({ secId, section, handleOnChange, addQuestion, addResponseOption }: CreateResearchSectionProps) => {
 
   return (
     <Box
@@ -21,7 +23,7 @@ export const CreateResearchSection = ({ idx, section, handleOnChange, addQuestio
       padding={["6", "8"]}
       mb={["6", "8"]}
     >
-      <Heading title={`Sessão ${idx + 1}`} />
+      <Heading title={`Sessão ${secId + 1}`} />
 
       <Divider marginY="6" borderColor="gray.700"></Divider>
 
@@ -31,7 +33,7 @@ export const CreateResearchSection = ({ idx, section, handleOnChange, addQuestio
             name="name"
             label="Nome da sessão"
             value={section.name}
-            onChange={(event) => handleOnChange(event.target.value, 'name', idx)}
+            onChange={(event) => handleOnChange(event.target.value, 'name', secId)}
           />
         </SimpleGrid>
 
@@ -40,15 +42,27 @@ export const CreateResearchSection = ({ idx, section, handleOnChange, addQuestio
             name="description"
             label="Descrição"
             value={section.description}
-            onChange={(event) => handleOnChange(event.target.value, 'description', idx)}
+            onChange={(event) => handleOnChange(event.target.value, 'description', secId)}
           />
         </SimpleGrid>
       </VStack>
 
+      {!!section.questions && section.questions.length > 0 && (
+        section.questions.map((question, idx) => (
+          <CreateResearchQuestion
+            key={idx}
+            queId={idx}
+            secId={secId}
+            question={question}
+            handleOnChange={handleOnChange}
+            addResponseOption={addResponseOption}
+          />
+        ))
+      )}
 
       <Flex marginTop="8" justify="flex-end">
         <HStack spacing="4">
-          <Button colorScheme="pink" type="button" onClick={() => addQuestion(idx)}>Adicionar Pergunta</Button>
+          <Button colorScheme="pink" type="button" onClick={() => addQuestion(secId)}>Adicionar Pergunta</Button>
         </HStack>
       </Flex>
     </Box>
