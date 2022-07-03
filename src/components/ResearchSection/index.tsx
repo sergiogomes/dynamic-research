@@ -2,6 +2,7 @@
 import { Box, Button, Divider, Flex, HStack, SimpleGrid, VStack } from '@chakra-ui/react';
 
 import { Input } from '../../components/Form/Input';
+import { Switch } from '../../components/Form/Switch';
 import { Heading } from '../../components/Heading';
 import { CreateResearchQuestion } from '../ResearchQuestion';
 import { IResearchSection } from '../../interfaces/IResearchSection';
@@ -9,7 +10,7 @@ import { IResearchSection } from '../../interfaces/IResearchSection';
 interface CreateResearchSectionProps {
   secId: number;
   section: IResearchSection;
-  handleOnChange: (value: string | number, target: string, secId?: number, queId?: number, optId?: number) => void;
+  handleOnChange: (value: string | number | boolean, target: string, secId?: number, queId?: number, optId?: number) => void;
   addQuestion: (secId?: number) => void;
   addResponseOption: (secId?: number, queId?: number) => void;
 }
@@ -45,6 +46,16 @@ export const CreateResearchSection = ({ secId, section, handleOnChange, addQuest
             onChange={(event) => handleOnChange(event.target.value, 'description', secId)}
           />
         </SimpleGrid>
+
+        {/* <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
+          <Switch
+            name="oneQuestionPerPage"
+            label="Exibe uma sessão por página"
+            colorScheme='pink'
+            isChecked={section.oneQuestionPerPage}
+            onChange={(event) => handleOnChange(event.target.checked, 'oneQuestionPerPage', secId)}
+          />
+        </SimpleGrid> */}
       </VStack>
 
       {!!section.questions && section.questions.length > 0 && (

@@ -10,7 +10,7 @@ interface CreateResearchResponseOptionProps {
   queId: number;
   secId: number;
   option: IResearchResponseOption;
-  handleOnChange: (value: string | number, target: string, secId?: number, queId?: number, optId?: number) => void;
+  handleOnChange: (value: string | number | boolean, target: string, secId?: number, queId?: number, optId?: number) => void;
 }
 
 export const CreateResearchResponseOption = ({ optId, queId, secId, option, handleOnChange }: CreateResearchResponseOptionProps) => {

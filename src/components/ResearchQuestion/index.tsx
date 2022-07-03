@@ -10,7 +10,7 @@ interface CreateResearchQuestionProps {
   queId: number;
   secId: number;
   question: IResearchQuestion;
-  handleOnChange: (value: string | number, target: string, secId?: number, queId?: number, optId?: number) => void;
+  handleOnChange: (value: string | number | boolean, target: string, secId?: number, queId?: number, optId?: number) => void;
   addResponseOption: (secId?: number, queId?: number) => void;
 }
 

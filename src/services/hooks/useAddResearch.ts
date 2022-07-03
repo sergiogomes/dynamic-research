@@ -158,7 +158,7 @@ interface useAddResearchReturn {
   formState: FormState<FieldValues>;
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
-  handleOnChange: (value: string | number, target: string, secId?: number, queId?: number, optId?: number) => void;
+  handleOnChange: (value: string | number | boolean, target: string, secId?: number, queId?: number, optId?: number) => void;
   handleCreateResearch: SubmitHandler<IResearch>;
   addSection: () => void;
   addQuestion: (secId?: number) => void;

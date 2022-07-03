@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Box, Button, Divider, Flex, HStack, SimpleGrid, VStack } from '@chakra-ui/react';
 
 import { Input } from '../../components/Form/Input';
+import { Switch } from '../../components/Form/Switch';
 import { Header } from '../../components/Header';
 import { Heading } from '../../components/Heading';
 import { Sidebar } from '../../components/Sidebar';
@@ -59,6 +60,27 @@ const CreateResearch = () => {
                   onChange={(event) => handleOnChange(event.target.value, 'version')}
                 />
               </SimpleGrid>
+
+              {/* <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
+                <Switch
+                  name="captureLead"
+                  label="Ativar captura de LEAD"
+                  colorScheme='pink'
+                  isChecked={research.captureLead}
+                  error={formState.errors.captureLead}
+                  {...register('captureLead')}
+                  onChange={(event) => handleOnChange(event.target.checked, 'captureLead')}
+                />
+                <Switch
+                  name="oneSectionPerPage"
+                  label="Exibe uma sessão por página"
+                  colorScheme='pink'
+                  isChecked={research.oneSectionPerPage}
+                  error={formState.errors.oneSectionPerPage}
+                  {...register('oneSectionPerPage')}
+                  onChange={(event) => handleOnChange(event.target.checked, 'oneSectionPerPage')}
+                />
+              </SimpleGrid> */}
 
               <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
                 <Input
