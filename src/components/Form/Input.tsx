@@ -10,7 +10,7 @@ import { forwardRef, ForwardRefRenderFunction } from "react";
 
 interface InputProps extends ChakraInputProps {
   name: string;
-  value?: string;
+  value?: string | number;
   label?: string;
   error?: FieldError;
 }

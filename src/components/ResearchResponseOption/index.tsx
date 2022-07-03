@@ -29,10 +29,20 @@ export const CreateResearchResponseOption = ({ optId, queId, secId, option, hand
       <VStack spacing="8">
         <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
           <Input
-            name="option"
+            name="name"
             label="Opção"
             value={option.name}
             onChange={(event) => handleOnChange(event.target.value, 'name', secId, queId, optId)}
+          />
+        </SimpleGrid>
+
+        <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
+          <Input
+            name="weight"
+            label="Peso"
+            type="number"
+            value={option.weight}
+            onChange={(event) => handleOnChange(event.target.value, 'weight', secId, queId, optId)}
           />
         </SimpleGrid>
 
