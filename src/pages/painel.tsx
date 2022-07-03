@@ -1,6 +1,6 @@
-import { Flex, SimpleGrid, Box, Text, theme } from '@chakra-ui/react';
-import dynamic from 'next/dynamic';
 import React from 'react';
+import dynamic from 'next/dynamic';
+import { Flex, SimpleGrid, Box, Text, theme } from '@chakra-ui/react';
 
 import { Header } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
@@ -26,7 +26,8 @@ const options = {
     enabled: false,
   },
   tooltip: {
-    enabled: false,
+    enabled: true,
+    theme: 'dark',
   },
   xaxis: {
     type: "datetime" as any,
@@ -58,7 +59,9 @@ const options = {
 };
 
 const series = [
-  { name: 'serie1', data: [31, 120, 10, 28, 61, 18, 109] }
+  { name: 'Número de acessos', data: [31, 120, 10, 28, 61, 18, 109] },
+  { name: 'Pesquisas respondidas', data: [23, 90, 7, 20, 45, 12, 76] },
+  { name: 'CTAs clicados', data: [9, 41, 3, 9, 13, 6, 31] },
 ];
 
 export default function Dashboard() {
@@ -83,23 +86,7 @@ export default function Dashboard() {
             paddingBottom="4"
           >
             <Text fontSize="lg" marginBottom="4">
-              Inscritos da semana
-            </Text>
-            <Chart
-              type="area"
-              height={160}
-              options={options}
-              series={series}
-            />
-          </Box>
-          <Box
-            padding={["6", "8"]}
-            backgroundColor="gray.800"
-            borderRadius={8}
-            paddingBottom="4"
-          >
-            <Text fontSize="lg" marginBottom="4">
-              Taxa da abertura
+              Visão Geral
             </Text>
             <Chart
               type="area"
